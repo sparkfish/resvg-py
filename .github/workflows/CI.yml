@@ -58,7 +58,7 @@ jobs:
           install: |
             apt-get update
             apt-get install -y --no-install-recommends python3 python3-pip
-            pip3 install -U pip pytest
+            pip3 install -U pip pytest pytest-snapshot
           run: |
             set -e
             pip3 install resvg-py --find-links dist --force-reinstall
