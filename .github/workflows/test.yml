@@ -1,4 +1,4 @@
-name: Test tap-pipedream
+name: Test
 
 on:
   push:
