@@ -1,5 +1,3 @@
-use numpy::ndarray::Array3;
-use numpy::{IntoPyArray, PyArray3};
 use pyo3::prelude::*;
 use pyo3::types::PyBytes;
 use resvg::tiny_skia::Pixmap;
@@ -126,30 +124,6 @@ impl RenderedImage {
     /// Get the height of the image.
     pub fn height(&self) -> u32 {
         self.pixmap.height()
-    }
-
-    /// Returns the rendered image as a numpy array.
-    ///
-    /// The array has shape (height, width, 4) and contains RGBA data.
-    pub fn as_array<'py>(&self, py: Python<'py>) -> PyResult<&'py PyArray3<u8>> {
-        let pixels = self.pixmap.pixels();
-
-        Ok(Array3::from_shape_fn(
-            ((self.height()) as usize, (self.width()) as usize, 4),
-            |(y, x, c)| {
-                let index = y * self.width() as usize + x;
-                let pixel = &pixels[index];
-
-                match c {
-                    0 => pixel.red(),
-                    1 => pixel.green(),
-                    2 => pixel.blue(),
-                    3 => pixel.alpha(),
-                    _ => unreachable!(),
-                }
-            },
-        )
-        .into_pyarray(py))
     }
 
     /// Returns the rendered image as bytes in PNG format.

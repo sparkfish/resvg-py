@@ -19,17 +19,15 @@ Overall, `resvg-py` provides a simple and powerful way to work with SVG images i
 from pathlib import Path
 
 import resvg_py
-from PIL import Image
 
 options = resvg_py.SVGOptions()
 r = resvg_py.Resvg(options)
 
 with Path("resources/examples/svg/octocat.svg").open("r") as f:
     rendered = r.render(f.read(), 400, 400)
-    array = rendered.as_array()
-    im = Image.fromarray(array)
-    im.save("image.png")
 
+    with open("image.png", "wb") as f:
+        f.write(rendered.as_png())
 ```
 
 # Options
