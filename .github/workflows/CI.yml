@@ -20,6 +20,7 @@ permissions:
 jobs:
   linux:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       matrix:
         target: [x86_64, x86, aarch64, armv7, s390x, ppc64le]
@@ -66,6 +67,7 @@ jobs:
 
   windows:
     runs-on: windows-latest
+    timeout-minutes: 15
     strategy:
       matrix:
         target: [x64, x86]
@@ -97,6 +99,7 @@ jobs:
 
   macos:
     runs-on: macos-latest
+    timeout-minutes: 15
     strategy:
       matrix:
         target: [x86_64, aarch64]
